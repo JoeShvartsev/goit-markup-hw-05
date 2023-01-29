@@ -91,7 +91,10 @@ button {
 .portfolio-item:hover {
     box-shadow: var(--portfolio-card-shadow)
 }
-
+.modal .close-button:is(:hover,:focus){
+    background-color: var(--pressed-state--);
+    fill: var(--white--)
+}
 
 
 
@@ -130,7 +133,7 @@ button {
 .header {
     border-bottom: 1px solid var(--accent--);
     padding-top: 24px;
-    padding-bottom: 24px;
+    padding-bottom: 0px;
 }
 .section-header {
     display: flex;
@@ -155,8 +158,33 @@ button {
     display: flex;
     margin-left: 76px;
 }
+.nav-link {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
+    
+}
 .nav-item:not(:last-child) {
     margin-right: 40px;
+}
+.nav-studio::after
+{
+    display: block;
+    content: "";
+    margin-top: 24px;
+    width: 48px;
+    height: 4px;
+    background: var(--pressed-state--);
+    border-radius: 2px;
+}
+.nav-portfolio::after{
+    display: block;
+    content: "";
+    margin-top: 24px;
+    width: 66px;
+    height: 4px;
+    background: var(--pressed-state--);
+    border-radius: 2px;
 }
 .adress-list {
     display: flex;
@@ -166,9 +194,10 @@ button {
 }
 .nav-link {
     font-weight: 500;
-    color: var(--dark--); 
+    color: var(--dark--);
     line-height: 1.5;
     letter-spacing: 0.02em;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
 }
 .adress-link {
     color: var(--text--);
@@ -181,9 +210,8 @@ button {
 .adress-item, .logo {
     text-decoration: none;
     list-style-type: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
+
 
 
 /* footer styles */
@@ -245,6 +273,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
 }
 
 
@@ -271,13 +300,14 @@ button {
     border-radius: 4px;
     font-family: inherit ;
     font-weight: 500;
-    background: var(--primary-brand--);
+    background-color: var(--primary-brand--);
     border-color: var(--primary-brand--);
     color: var(--white--);
     box-shadow: var(--order-but-shadow);
     line-height: 1.5;
     letter-spacing: 0.04em;
     cursor: pointer;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
 }
 
 
@@ -412,6 +442,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
 }
 
 
@@ -446,6 +477,7 @@ button {
     border-bottom: 1px solid var(--subtle-text--);
     border-left: 1px solid var(--subtle-text--);
     border-radius: 4px;;
+    transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
 }
 .customers-social-items:not(:last-child) {
     margin-right: 24px;
@@ -456,9 +488,11 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
 }
 .customers-social-icons {
     fill: var(--subtle-text--);
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
 }
 
 
@@ -493,6 +527,7 @@ button {
     letter-spacing: 0.04em;
     line-height: 1.5;
     cursor: pointer;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1); ;
 }
 .portfolio-list {
     display: flex;
@@ -502,6 +537,7 @@ button {
 }
 .portfolio-item {
     flex-basis: calc((100% - 48px) / 3);
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .portfolio-card {
     padding:32px 16px 32px;
@@ -522,9 +558,76 @@ button {
     letter-spacing: 0.02em;
     line-height: 1.5;
 }
-.portfolio-description {
-    color: var(--text--);
+.card-img {
+    position: relative; 
+    overflow: hidden;
+}
+.portfolio-link:is(:hover,:focus) .overlay {
+    transform: translateY(0);
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px 32px 164px;
+    background-color:rgba(77, 90, 229, 1);
+    transform: translateY(100%);
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
+}
+.card-description {
+    color: var(--light--);
+    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.5;
     letter-spacing: 0.02em;
-    line-height: 1.5; 
 }
 
+/* backdrop */
+.backdrop{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(46, 47, 66, 0.4);
+}
+.backdrop.is-hidden {
+    pointer-events: none;
+    opacity: 0;
+
+}
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 408px;
+    min-height: 576px;
+    background-color: #FCFCFC;
+    border-radius: 4px;
+    box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.2),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+}
+
+.modal .close-button {
+    position: absolute;
+    top: 24px;
+    right: 18px;
+    width: 24px;
+    height: 24px;
+    display: block;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    background-color: #E7E9FC;
+    cursor: pointer;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.close-button-icon {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
